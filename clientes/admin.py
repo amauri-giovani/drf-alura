@@ -11,3 +11,6 @@ class Clientes(admin.ModelAdmin):
     list_editable = ('ativo',)
     list_per_page = 25
     ordering = ["nome"]
+
+admin.site.register(Cliente, Clientes)
+
