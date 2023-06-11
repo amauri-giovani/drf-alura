@@ -1,20 +1,28 @@
+from rest_framework import viewsets
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from rest_framework import viewsets, status
 from rest_framework.generics import ListAPIView
+from rest_framework.authentication import BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
+from escola.models import Aluno, Curso, Matricula
 # from rest_framework.authentication import BasicAuthentication
 # from rest_framework.permissions import IsAuthenticated
 
 from escola.models import Aluno, Curso, Matricula, Imagem
 from escola.serializer import AlunoSerializer, CursoSerializer, MatriculaSerializer, ListaMatriculasAlunoSerializer, \
+    ListaMatriculadosPorCursoSerializer
     ListaMatriculadosPorCursoSerializer, AlunoSerializerV2, ImagemSerializer
 
 
 class AlunosViewSet(viewsets.ModelViewSet):
     """ Exibindo todos os alunos """
     queryset = Aluno.objects.all()
+    serializer_class = AlunoSerializer
+    authentication_classes = [BasicAuthentication]
+    permission_classes = [IsAuthenticated]
     # authentication_classes = [BasicAuthentication]
     # permission_classes = [IsAuthenticated]
     def get_serializer_class(self):
