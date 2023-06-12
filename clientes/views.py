@@ -1,9 +1,7 @@
-from rest_framework import viewsets
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets, filters
 from clientes.serializers import ClienteSerializer
 from clientes.models import Cliente
-
 
 class ClientesViewSet(viewsets.ModelViewSet):
     """Listando clientes"""
