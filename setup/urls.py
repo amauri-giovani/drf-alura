@@ -21,7 +21,8 @@ from django.urls import path, include
 
 from clientes.views import ClientesViewSet
 from escola.views import (
-    AlunosViewSet, CursosViewSet, MatriculasViewSet, ListaMatriculasAluno, ListaMatriculadosPorCurso, ImagemViewSet
+    AlunosViewSet, CursosViewSet, MatriculasViewSet, ListaMatriculasAluno, ListaMatriculadosPorCurso, ImagemViewSet,
+    TesteView,
 )
 from rest_framework.routers import DefaultRouter
 
@@ -37,4 +38,5 @@ urlpatterns = [
     path('', include(router.urls)),
     path('aluno/<int:pk>/matriculas/', ListaMatriculasAluno.as_view()),
     path('curso/<int:pk>/matriculas/', ListaMatriculadosPorCurso.as_view()),
+    path('teste_xml', TesteView.as_view())
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

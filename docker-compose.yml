@@ -1,0 +1,25 @@
+services:
+  redis:
+    container_name: redis-drf
+    image: redis
+    ports:
+      - "6379:6379"
+#    restart: always
+    networks:
+      - app-network
+
+  django:
+    depends_on:
+      - redis
+    container_name: drf
+    build:
+      context: .
+    ports:
+      - "8000:8000"
+#    restart: always
+    command: "python manage.py runserver 0.0.0.0:8000"
+    networks:
+      - app-network
+
+networks:
+  app-network:

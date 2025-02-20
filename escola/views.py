@@ -1,8 +1,12 @@
+from django.http import HttpResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from rest_framework import viewsets, status
 from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework_xml.parsers import XMLParser
+from rest_framework_xml.renderers import XMLRenderer
 
 # from rest_framework.authentication import BasicAuthentication
 # from rest_framework.permissions import IsAuthenticated
@@ -76,3 +80,11 @@ class ListaMatriculadosPorCurso(ListAPIView):
 class ImagemViewSet(viewsets.ModelViewSet):
     queryset = Imagem.objects.all()
     serializer_class = ImagemSerializer
+
+
+class TesteView(APIView):
+    def get(self, request, format=None):
+        # parser_classes = (XMLParser,)
+        # renderer_classes = (XMLRenderer,)
+        # return Response(request.body.decode("utf-8"))
+        return HttpResponse(request.body, content_type="text/xml")
